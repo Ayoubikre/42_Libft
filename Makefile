@@ -1,6 +1,6 @@
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
-SRCS1  = ft_isalpha.c \
+SRC  = ft_isalpha.c \
 			ft_isdigit.c \
 			ft_isprint.c \
 			ft_isascii.c \
@@ -34,8 +34,7 @@ SRCS1  = ft_isalpha.c \
 			ft_putstr_fd.c \
 			ft_putendl_fd.c \
 			ft_putnbr_fd.c \
-
-BONUS = ft_lstnew_bonus.c \
+			ft_lstnew_bonus.c \
 			ft_lstadd_front_bonus.c \
 			ft_lstsize_bonus.c \
 			ft_lstlast_bonus.c \
@@ -44,31 +43,37 @@ BONUS = ft_lstnew_bonus.c \
 			ft_lstclear_bonus.c \
 			ft_lstiter_bonus.c\
 			ft_lstmap_bonus.c \
+			get_next_line.c\
+			get_next_line_utils.c\
+			ft_printf.c \
+			ft_putchar.c \
+			ft_putnbr.c \
+			ft_putstr.c \
+			ft_print_c.c \
+			ft_print_d.c \
+			ft_print_p.c \
+			ft_print_s.c \
+			ft_print_x.c \
 
-OBJS = $(SRCS1:.c=.o)
 
-OBJS2 = $(BONUS:.c=.o)
+OBJ = $(SRC:.c=.o)
 
 NAME = libft.a
 
-
 all: $(NAME)
 
-$(NAME): $(OBJS)
-	ar rcs $(NAME) $(OBJS)
-
-bonus: $(OBJS2)
-	ar rcs $(NAME) $(OBJS2)
+$(NAME): $(OBJ)
+	ar rcs $(NAME) $(OBJ)
 	
 %.o: %.c libft.h
 	$(CC) $(CFLAGS) -c $< -o $@
 	
 clean:
-	rm -f $(OBJS) $(OBJS2)
+	rm -f $(OBJ)
 
 fclean: clean
 	rm -f $(NAME)
 
 re: fclean all
 
-.PHONY: all clean fclean re bonus
+.PHONY: all clean fclean re 

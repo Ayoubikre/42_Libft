@@ -1,29 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   ft_print_p.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/23 15:32:59 by aakritah          #+#    #+#             */
-/*   Updated: 2025/02/08 19:11:24 by aakritah         ###   ########.fr       */
+/*   Created: 2024/11/09 21:53:00 by aakritah          #+#    #+#             */
+/*   Updated: 2025/02/08 19:01:22 by aakritah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strchr(const char *s, int c)
+static int	ft_putnbrx(unsigned long i)
 {
-	size_t	s1;
-	size_t	i;
+	int	count;
 
-	s1 = ft_strlen(s);
-	i = 0;
-	while (i < s1 + 1)
+	count = 0;
+	if (i >= 16)
+		count += ft_putnbrx(i / 16);
+	if (10 <= i % 16 && i % 16 <= 15)
 	{
-		if (s[i] == (char)c)
-			return ((char *)(s + i));
-		i++;
+		ft_putchar((i % 16) - 10 + 'a');
+		count++;
 	}
-	return (NULL);
+	else if (i % 16 <= 9)
+	{
+		ft_putchar((i % 16) + '0');
+		count++;
+	}
+	return (count);
+}
+
+int	ft_print_p(va_list ptr)
+{
+	ft_putstr("0x");
+	return (ft_putnbrx((unsigned long)va_arg(ptr, void *)) + 2);
 }
